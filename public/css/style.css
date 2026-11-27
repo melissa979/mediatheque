@@ -1,0 +1,173 @@
+/* =========================================================
+   Médiathèque : thème « Papier & encre »
+   Barre latérale vert sapin, fond papier, titres à empattements,
+   étiquettes façon tampon de bibliothèque.
+   ========================================================= */
+:root {
+  --sapin: #1e3d34;
+  --sapin-clair: #2c5a4c;
+  --papier: #f6f1e7;
+  --carte: #fffdf8;
+  --encre: #2b2a27;
+  --gris: #7a756b;
+  --ligne: #e4dccb;
+  --or: #c9a227;
+  --brique: #b5452f;
+  --vert: #3f7d4e;
+  --ombre: 0 2px 0 rgba(43, 42, 39, .06), 0 8px 24px rgba(43, 42, 39, .08);
+  --rayon: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color: var(--encre);
+  background: var(--papier);
+  background-image: radial-gradient(rgba(201, 162, 39, .07) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* ---------- Barre latérale ---------- */
+nav {
+  position: fixed; inset: 0 auto 0 0; width: 230px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 26px 16px;
+  background: var(--sapin);
+  background-image: linear-gradient(180deg, var(--sapin) 0%, #173129 100%);
+  box-shadow: 4px 0 18px rgba(0, 0, 0, .12);
+}
+nav strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px; color: #fff; letter-spacing: .5px;
+  padding: 0 10px 18px; margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+nav strong::before { content: "📚 "; }
+nav a {
+  color: #d8e6df; text-decoration: none;
+  padding: 10px 12px; border-radius: 8px;
+  border-left: 3px solid transparent;
+  transition: background .2s, color .2s, border-color .2s;
+}
+nav a:hover, nav a.actif {
+  background: rgba(255, 255, 255, .08); color: #fff; border-left-color: var(--or);
+}
+nav .droite {
+  margin-top: auto; padding: 14px 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, .15);
+  color: #b9cdc4; font-size: 13px; line-height: 1.6;
+}
+nav .droite a { display: inline; padding: 0; border: 0; color: var(--or); }
+nav .droite a:hover { background: none; text-decoration: underline; }
+
+/* ---------- Contenu ---------- */
+main { max-width: 1050px; margin: 0 auto; padding: 36px 32px 60px; }
+nav ~ main { margin-left: 230px; margin-right: 0; max-width: none; padding-left: 48px; padding-right: 48px; }
+
+h1, h2 { font-family: Georgia, "Times New Roman", serif; color: var(--sapin); font-weight: normal; }
+h1 { font-size: 34px; margin: 0 0 24px; padding-bottom: 12px; border-bottom: 2px solid var(--ligne); position: relative; }
+h1::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 70px; height: 2px; background: var(--or); }
+h2 { font-size: 22px; margin-top: 34px; }
+small { color: var(--gris); font-size: 55%; font-family: "Segoe UI", Arial, sans-serif; }
+a { color: var(--sapin-clair); }
+
+/* ---------- Tuiles du tableau de bord ---------- */
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px; margin-bottom: 28px; }
+.tuile {
+  background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre);
+  padding: 20px 22px; color: var(--gris); border-top: 4px solid var(--sapin-clair);
+  transition: transform .2s;
+}
+.tuile:hover { transform: translateY(-3px); }
+.tuile span { display: block; font-family: Georgia, serif; font-size: 40px; color: var(--sapin); line-height: 1.1; }
+.tuile.alerte { border-top-color: var(--brique); }
+.tuile.alerte span { color: var(--brique); }
+
+/* ---------- Boutons ---------- */
+button, .bouton {
+  display: inline-block; cursor: pointer; text-decoration: none;
+  font: inherit; font-size: 15px;
+  background: var(--sapin); color: #fff;
+  border: 0; border-radius: 999px; padding: 10px 20px;
+  box-shadow: 0 3px 0 #10241e;
+  transition: transform .1s, background .2s, box-shadow .1s;
+}
+button:hover, .bouton:hover { background: var(--sapin-clair); }
+button:active, .bouton:active { transform: translateY(2px); box-shadow: 0 1px 0 #10241e; }
+button.danger { background: var(--brique); box-shadow: 0 3px 0 #7d2c1c; }
+
+/* ---------- Formulaires ---------- */
+label { display: block; margin: 0 0 14px; font-size: 14px; color: var(--gris); }
+input, select {
+  width: 100%; margin-top: 6px; padding: 10px 12px;
+  font: inherit; color: var(--encre);
+  background: #fff; border: 1px solid var(--ligne); border-radius: 8px;
+  transition: border-color .2s, box-shadow .2s;
+}
+input:focus, select:focus { outline: none; border-color: var(--or); box-shadow: 0 0 0 3px rgba(201, 162, 39, .2); }
+.formulaire {
+  background: var(--carte); max-width: 560px; padding: 28px;
+  border-radius: var(--rayon); box-shadow: var(--ombre);
+}
+.formulaire > a { margin-left: 12px; color: var(--gris); }
+.ligne { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.ligne input { flex: 1; min-width: 200px; width: auto; margin: 0; }
+.ligne select { margin: 0; }
+.actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 20px 0; }
+.actions form { margin: 0; }
+
+/* ---------- Tableaux façon registre ---------- */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  background: var(--carte); border-radius: var(--rayon); overflow: hidden; box-shadow: var(--ombre);
+}
+th {
+  text-align: left; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--sapin); background: #efe7d6; padding: 12px 14px; border-bottom: 2px solid var(--or);
+}
+td { padding: 11px 14px; border-bottom: 1px solid var(--ligne); }
+tr:last-child td { border-bottom: 0; }
+tr:hover td { background: #fbf6ea; }
+.fiche { max-width: 560px; }
+.fiche th { width: 190px; text-transform: none; letter-spacing: 0; font-size: 14px; border-bottom: 1px solid var(--ligne); }
+
+/* ---------- Messages ---------- */
+.message { padding: 12px 16px 12px 44px; border-radius: 8px; position: relative; margin: 0 0 16px; }
+.message::before { position: absolute; left: 16px; top: 11px; font-weight: bold; }
+.message.succes { background: #e7f1e6; color: #2f5f37; border-left: 4px solid var(--vert); }
+.message.succes::before { content: "✓"; }
+.message.erreur { background: #f8e6e1; color: #8a2f1e; border-left: 4px solid var(--brique); }
+.message.erreur::before { content: "!"; }
+.message.info { background: #f4ecd6; color: #6b5512; border-left: 4px solid var(--or); }
+.message.info::before { content: "i"; }
+
+/* ---------- Étiquettes façon tampon ---------- */
+.etiquette {
+  display: inline-block; padding: 2px 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  border: 2px solid currentColor; border-radius: 4px; transform: rotate(-2deg); background: transparent;
+}
+.etiquette.vert { color: var(--vert); }
+.etiquette.orange { color: #b07a10; }
+.etiquette.rouge { color: var(--brique); }
+
+/* ---------- Page de connexion ---------- */
+.carte-connexion {
+  max-width: 400px; margin: 9vh auto 0; padding: 36px 34px 30px;
+  background: var(--carte); border-radius: 14px; box-shadow: var(--ombre);
+  border-top: 6px solid var(--sapin); text-align: left;
+}
+.carte-connexion h1 { text-align: center; border: 0; }
+.carte-connexion h1::before { content: "📚"; display: block; font-size: 42px; margin-bottom: 6px; }
+.carte-connexion h1::after { left: 50%; transform: translateX(-50%); }
+.carte-connexion button { width: 100%; margin-top: 8px; }
+
+/* ---------- Petits écrans ---------- */
+@media (max-width: 800px) {
+  nav { position: static; width: auto; flex-direction: row; flex-wrap: wrap; padding: 12px; }
+  nav strong { border: 0; padding: 6px 10px; margin: 0; }
+  nav .droite { margin: 0; border: 0; padding: 6px 10px; }
+  nav ~ main { margin-left: 0; padding: 24px 16px; }
+}
